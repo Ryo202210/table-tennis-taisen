@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="ja"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;ポップな卓球総当たり対戦表&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Zen Maru Gothic', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.cell-input {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 45px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #e2e8f0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f8fafc;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.cell-input:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #f59e0b;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.pop-button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.1s active;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.pop-button:active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(0.95);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 640px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.table-container {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>overflow-x: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* スクロールバーのカスタム */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #cbd5e1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-orange-50 min-h-screen pb-12 text-slate-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="app" class="max-w-4xl mx-auto px-4 py-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="text-center mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="inline-block bg-white p-4 rounded-3xl shadow-sm border-4 border-orange-200 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 class="text-3xl font-black text-orange-500 tracking-tighter"&gt;🏓 卓球！リーグ戦&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-orange-400 font-bold"&gt;4名〜9名対応・自動保存つき&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- ステップ1: 参加者入力 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="bg-white rounded-3xl shadow-md p-6 mb-8 border-b-8 border-orange-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-black mb-4 flex items-center text-orange-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="bg-orange-500 text-white w-8 h-8 rounded-full inline-flex items-center justify-center mr-2 shadow-sm"&gt;1&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>参加者を決めよう！</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="setup-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6" id="player-inputs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- JSで生成 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex flex-wrap gap-3 justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="addPlayer()" id="add-btn" class="pop-button bg-slate-100 hover:bg-slate-200 text-slate-600 px-5 py-2 rounded-2xl transition font-bold border-b-4 border-slate-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>＋ 追加</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="generateTable()" class="pop-button bg-orange-500 hover:bg-orange-600 text-white px-8 py-2 rounded-2xl transition font-black shadow-lg border-b-4 border-orange-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>対戦表をつくる！</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- ステップ2: 対戦成績入力 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="results-section" class="bg-white rounded-3xl shadow-md p-6 mb-8 border-b-8 border-blue-100 hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-black mb-4 flex items-center text-blue-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="bg-blue-500 text-white w-8 h-8 rounded-full inline-flex items-center justify-center mr-2 shadow-sm"&gt;2&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>スコアを入力！</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="table-container mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;table class="w-full border-separate border-spacing-1 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;tr id="league-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;!-- JSで生成 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;tbody id="league-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- JSで生成 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/tbody&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- 試合順序リスト --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mt-6 p-4 bg-blue-50 rounded-2xl"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-lg font-black text-blue-700 mb-3 flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>📋 試合順リスト</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="match-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-bold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- JSで生成 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- ステップ3: 順位表 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="ranking-section" class="bg-white rounded-3xl shadow-md p-6 mb-8 border-b-8 border-green-100 hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-black mb-4 flex items-center text-green-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="bg-green-500 text-white w-8 h-8 rounded-full inline-flex items-center justify-center mr-2 shadow-sm"&gt;3&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>今のじゅんい！</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="table-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;table class="w-full border-collapse text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;tr class="text-slate-400 text-xs border-b-2 border-slate-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;th class="py-2 px-2"&gt;ランク&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;th class="py-2 px-2"&gt;なまえ&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;th class="py-2 px-2"&gt;勝ち/負け&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;th class="py-2 px-2 text-right"&gt;セット差&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;tbody id="ranking-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- JSで生成 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/tbody&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- リセットボタン --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="text-center py-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="confirmReset()" class="text-slate-400 hover:text-red-400 text-xs font-bold underline decoration-2 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>データをぜんぶ消す</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- トースト通知 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="toast" class="fixed top-10 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-8 py-3 rounded-full text-sm font-bold opacity-0 transition-all pointer-events-none shadow-2xl z-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ほぞんしました！</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let players = [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let scores = {};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const savedPlayers = localStorage.getItem('pingpong_players_pop');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const savedScores = localStorage.getItem('pingpong_scores_pop');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (savedPlayers) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>players = JSON.parse(savedPlayers);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>scores = JSON.parse(savedScores || '{}');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderPlayerInputs();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (players.length &gt;= 4) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>generateTable(false);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// 初期の名前を「プレイヤー1, 2...」に変更</p>
+<p class="p1"><span class="Apple-converted-space">                </span>players = ['プレイヤー1', 'プレイヤー2', 'プレイヤー3', 'プレイヤー4'];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderPlayerInputs();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderPlayerInputs() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const container = document.getElementById('player-inputs');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>players.forEach((name, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>div.className = 'flex items-center bg-orange-50 p-3 rounded-2xl border-2 border-white shadow-sm';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" value="${name}"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>onchange="updatePlayerName(${index}, this.value)"</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>class="bg-transparent border-none focus:ring-0 text-sm w-full font-black text-orange-700"</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>placeholder="名前"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="removePlayer(${index})" class="text-orange-200 hover:text-red-500 font-black px-2 text-xl"&gt;&amp;times;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>container.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('add-btn').style.display = players.length &gt;= 9 ? 'none' : 'inline-block';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addPlayer() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (players.length &lt; 9) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// 追加される時も「プレイヤー○」の形式にする</p>
+<p class="p1"><span class="Apple-converted-space">                </span>players.push(`プレイヤー${players.length + 1}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderPlayerInputs();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>saveData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function removePlayer(index) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (players.length &gt; 4) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>players.splice(index, 1);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderPlayerInputs();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>saveData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showToast("最低4人必要だよ！");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updatePlayerName(index, name) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>players[index] = name;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function generateTable(withToast = true) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (players.length &lt; 4) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showToast("4人以上で遊ぼう！");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('results-section').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ranking-section').classList.remove('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const header = document.getElementById('league-header');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>header.innerHTML = '&lt;th class="p-2 text-orange-300 text-xs"&gt;対戦&lt;/th&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>players.forEach(p =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>header.innerHTML += `&lt;th class="p-2 text-blue-600 font-black truncate max-w-[60px]"&gt;${p}&lt;/th&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const body = document.getElementById('league-body');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>body.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>players.forEach((p1, i) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let row = `&lt;tr&gt;&lt;td class="p-2 font-black text-blue-600 bg-blue-50 rounded-xl mb-1"&gt;${p1}&lt;/td&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>players.forEach((p2, j) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (i === j) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>row += `&lt;td class="bg-slate-100 rounded-xl text-center text-slate-300"&gt;/&lt;/td&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const key = i &lt; j ? `${i}-${j}` : `${j}-${i}`;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const score = scores[key] || { s1: '', s2: '' };</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const val1 = i &lt; j ? score.s1 : score.s2;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const val2 = i &lt; j ? score.s2 : score.s1;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>row += `</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;td class="p-1 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex flex-col sm:flex-row items-center justify-center gap-1 bg-white border-2 border-slate-50 rounded-xl p-1 shadow-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="number" value="${val1}" min="0"</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>onchange="updateScore(${i}, ${j}, 1, this.value)"</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>class="cell-input text-blue-500 font-black"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-slate-300 text-[10px]"&gt;vs&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="number" value="${val2}" min="0"</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>onchange="updateScore(${i}, ${j}, 2, this.value)"</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>class="cell-input text-red-400 font-black"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/td&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>row += '&lt;/tr&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>body.innerHTML += row;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderMatchList();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateRanking();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(withToast) showToast("対戦表をつくったよ！");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderMatchList() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const listContainer = document.getElementById('match-list');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>listContainer.innerHTML = '';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let matches = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; players.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>for (let j = i + 1; j &lt; players.length; j++) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>matches.push({ p1: i, p2: j });</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>matches.forEach((match, idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const key = `${match.p1}-${match.p2}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const isDone = scores[key] &amp;&amp; scores[key].s1 !== '' &amp;&amp; scores[key].s2 !== '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const scoreDisplay = isDone ? `${scores[key].s1} - ${scores[key].s2}` : '未対戦';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>div.className = `p-3 rounded-xl border-2 flex justify-between items-center ${isDone ? 'bg-white border-green-200 text-green-700' : 'bg-white border-blue-100 text-blue-400'}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="bg-slate-100 text-slate-400 rounded-lg w-6 h-6 flex items-center justify-center text-[10px] mr-2"&gt;${idx + 1}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="truncate max-w-[120px]"&gt;${players[match.p1]} vs ${players[match.p2]}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-xs font-black px-2 py-1 rounded-lg ${isDone ? 'bg-green-100' : 'bg-slate-100'}"&gt;${scoreDisplay}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>listContainer.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateScore(i, j, pos, val) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const p1Idx = i &lt; j ? i : j;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const p2Idx = i &lt; j ? j : i;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const key = `${p1Idx}-${p2Idx}`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!scores[key]) scores[key] = { s1: '', s2: '' };</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (i &lt; j) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (pos === 1) scores[key].s1 = val;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else scores[key].s2 = val;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (pos === 1) scores[key].s2 = val;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else scores[key].s1 = val;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>saveData();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateRanking();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderMatchList();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateRanking() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let stats = players.map((name, index) =&gt; ({</p>
+<p class="p1"><span class="Apple-converted-space">                </span>id: index,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>name: name,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>wins: 0,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>losses: 0,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setsWon: 0,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setsLost: 0</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Object.keys(scores).forEach(key =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const [idx1, idx2] = key.split('-').map(Number);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const s1 = parseInt(scores[key].s1);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const s2 = parseInt(scores[key].s2);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!isNaN(s1) &amp;&amp; !isNaN(s2)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stats[idx1].setsWon += s1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stats[idx1].setsLost += s2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stats[idx2].setsWon += s2;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stats[idx2].setsLost += s1;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (s1 &gt; s2) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>stats[idx1].wins++;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>stats[idx2].losses++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (s2 &gt; s1) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>stats[idx2].wins++;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>stats[idx1].losses++;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>stats.sort((a, b) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (b.wins !== a.wins) return b.wins - a.wins;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return (b.setsWon - b.setsLost) - (a.setsWon - a.setsLost);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rankingBody = document.getElementById('ranking-body');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>rankingBody.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>stats.forEach((stat, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const diff = stat.setsWon - stat.setsLost;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const emoji = index === 0 ? '👑' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>rankingBody.innerHTML += `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;tr class="border-b border-slate-50 hover:bg-green-50 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;td class="py-4 px-2 font-black text-lg text-slate-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>${emoji ? emoji : index + 1}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;td class="py-4 px-2 font-black text-slate-700"&gt;${stat.name}&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;td class="py-4 px-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-orange-500 font-black text-lg"&gt;${stat.wins}&lt;/span&gt;&lt;span class="text-xs text-slate-400 ml-1"&gt;勝&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-slate-300 font-black ml-1"&gt;${stat.losses}敗&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;td class="py-4 px-2 text-right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="inline-flex flex-col items-end"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="font-black ${diff &gt;= 0 ? 'text-green-500' : 'text-red-400'}"&gt;${diff &gt; 0 ? '+' : ''}${diff}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-[10px] text-slate-300 font-bold"&gt;set: ${stat.setsWon}/${stat.setsLost}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function saveData() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('pingpong_players_pop', JSON.stringify(players));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('pingpong_scores_pop', JSON.stringify(scores));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function confirmReset() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (confirm("データをぜんぶ消して、最初からやりなおす？")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>localStorage.removeItem('pingpong_players_pop');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>localStorage.removeItem('pingpong_scores_pop');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>location.reload();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showToast(msg) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const toast = document.getElementById('toast');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>toast.innerText = msg;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>toast.classList.remove('opacity-0');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>toast.classList.add('opacity-100', '-translate-y-2');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>toast.classList.add('opacity-0');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>toast.classList.remove('opacity-100', '-translate-y-2');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 2000);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
